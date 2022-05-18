@@ -13,7 +13,7 @@ const Header1 = styled.marquee`
   color: #000;
 `
 const Vector = styled.div`
-  width: 389px;
+  width: 24.3125rem;
   height: 1px;
   border: solid 1px #000;
 `
