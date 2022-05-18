@@ -21,8 +21,8 @@ const Box = styled.div`
 `
 
 const Oe9day = styled.div`
-  width: 170.4px;
-  height: 130.1px;
+  width: 10.65rem;
+  height: 8.1312rem;
   flex-grow: 0;
   font-family: Montserrat;
   font-size: 48px;
@@ -36,8 +36,8 @@ const Oe9day = styled.div`
 `
 
 const Ellipse = styled.div`
-  width: 156px;
-  height: 83px;
+  width: 9.75rem;
+  height: 5.1875rem;
   margin: 82px 0 18px 15px;
   padding: 14px 29px;
   border-radius: 90px;
@@ -46,8 +46,8 @@ const Ellipse = styled.div`
 `
 
 const Ellipse2 = styled.div`
-  width: 156px;
-  height: 83px;
+  width: 9.75rem;
+  height: 5.1875rem;
   flex-grow: 0;
   margin-left: 15px;
   padding: 17.4px 20.1px 23.4px 22.5px;
@@ -58,8 +58,8 @@ const Ellipse2 = styled.div`
 `
 
 const Ellipse3 = styled.button`
-  width: 360px;
-  height: 83px;
+  width: 22.5rem;
+  height: 5.1875rem;
   flex-grow: 0;
   margin: 2.1px 15px 190px;
   padding: 14px 32px;
@@ -69,8 +69,8 @@ const Ellipse3 = styled.button`
 `
 
 const DDay = styled.div`
-  width: 98px;
-  height: 55px;
+  width: 6.125rem;
+  height: 3.4375rem;
   font-family: Montserrat_Medium;
   font-size: 48px;
   font-weight: 500;
@@ -83,8 +83,8 @@ const DDay = styled.div`
 `
 
 const Letter = styled.div`
-  width: 296px;
-  height: 55px;
+  width: 18.5rem;
+  height: 3.4375rem;
   font-family: Montserrat_Medium;
   font-size: 48px;
   font-weight: 500;
