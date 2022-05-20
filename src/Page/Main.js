@@ -1,8 +1,13 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom';
 import styled from "styled-components";
 import Header from './Common/Header';
 import "../static/fonts/font.css";
 import Title from './Common/Title';
+
+const Wrapper = styled.div`
+  width: 100%;
+`
 
 const MainComment = styled.div`
   font-family: Montserrat_SemiBold;
@@ -99,8 +104,19 @@ const Letter = styled.div`
 
 
 const index = () => {
+
+  const history = useHistory();
+
+  const sendLetter = async () => {
+    try {
+      history.push("/sub2");
+    } catch (e) {
+    }
+  };
+
+
   return (
-    <>
+    <Wrapper>
       <Header/>
       <Box>
         <Title title={"HAPPY"}/>
@@ -113,8 +129,10 @@ const index = () => {
         oe9day
         </Oe9day>
       </Ellipse2>
-      <Ellipse3><Letter>Send a Letter</Letter></Ellipse3>
-    </>
+      <Ellipse3 onClick={sendLetter}>
+        <Letter>Send a Letter</Letter>
+      </Ellipse3>
+    </Wrapper>
   )
 }
 
