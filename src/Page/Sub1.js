@@ -31,6 +31,12 @@ const Box = styled.div`
 const FooterContainer = styled.div`
     margin: 3.813rem;
 `;
+
+const Letter = styled.img`
+    width: 22.5rem;
+    height: 17.563rem;
+`
+
 const index = () => {
     const context = useContext(Context);
     const {setPaper} = context;
@@ -55,11 +61,11 @@ const index = () => {
                         margin: "5.125rem 0.938rem 0rem"
                     }}
                 >
-                    <SwiperSlide><img src={mezin1}/></SwiperSlide>
-                    <SwiperSlide><img src={mezin2}/></SwiperSlide>
-                    <SwiperSlide><img src={mezin3}/></SwiperSlide>
-                    <SwiperSlide><img src={mezin4}/></SwiperSlide>
-                    <SwiperSlide><img src={mezin5}/></SwiperSlide>
+                    <SwiperSlide><Letter src={mezin1}/></SwiperSlide>
+                    <SwiperSlide><Letter src={mezin2}/></SwiperSlide>
+                    <SwiperSlide><Letter src={mezin3}/></SwiperSlide>
+                    <SwiperSlide><Letter src={mezin4}/></SwiperSlide>
+                    <SwiperSlide><Letter src={mezin5}/></SwiperSlide>
                 </Swiper>
                 <FooterContainer>
                     <Footer title={"NEXT"} onClick={didTapNext}/>
