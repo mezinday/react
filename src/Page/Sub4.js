@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Title from './Common/Title';
 import Header from './Common/Header';
 import Footer from './Common/Footer';
+import { useHistory } from 'react-router-dom';
 import '../static/fonts/font.css';
 
 const Box = styled.div`
@@ -21,11 +22,12 @@ const Text = styled.div`
     text-align: left;
     color: #000;
 `;
-const didTapNext = () => {
-    alert('clicked');
-}
   
 const index = () => {
+    const history = useHistory();
+    const didTapNext = () => {
+        history.push("/sub5");
+    }
     return (
         <>
             <Header/>

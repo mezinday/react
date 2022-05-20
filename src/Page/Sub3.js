@@ -4,6 +4,7 @@ import Title from './Common/Title';
 import Header from './Common/Header';
 import Footer from './Common/Footer';
 import { Context } from '../store/Store';
+import { useHistory } from 'react-router-dom';
 import '../static/fonts/font.css';
 
 const Box = styled.div`
@@ -12,15 +13,15 @@ const Box = styled.div`
     margin: 7rem 2.625rem 0rem 0.938rem;
 `;
 
-const didTapNext = () => {
-    alert('clicked');
-}
   
 const index = () => {
     const context = useContext(Context);
     const {paper} = context;
     const [letter, setLetter] = useState('');
-
+    const history = useHistory();
+    const didTapNext = () => {
+        history.push("/sub4");
+    }
     return (
         <>
             <Header/>
