@@ -2,6 +2,7 @@ import React from 'react'
 import styled from "styled-components";
 import Header from './Common/Header';
 import "../static/fonts/font.css";
+import Title from './Common/Title';
 
 const MainComment = styled.div`
   font-family: Montserrat_SemiBold;
@@ -102,9 +103,9 @@ const index = () => {
     <>
       <Header/>
       <Box>
-        <MainComment>HAPPY</MainComment>
-        <MainComment>BIRTHDAY</MainComment>
-        <MainComment>MEZIN!</MainComment>
+        <Title title={"HAPPY"}/>
+        <Title title={"BIRTHDAY"}/>
+        <Title title={"MEZIN!"}/>
       </Box>
       <Ellipse> <DDay>D-19</DDay></Ellipse>
       <Ellipse2>
