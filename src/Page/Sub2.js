@@ -94,7 +94,7 @@ const NONE = styled.label`
     align-items: center;
 `
 const FooterContainer = styled.div`
-  margin: 5.438rem 5.875rem 0rem 4.438rem;
+  margin: 3.813rem;
 `;
 const emojiList1 = [
     emoji1, emoji2,emoji3,
