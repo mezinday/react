@@ -16,6 +16,8 @@ const TOP = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    touch-action: none;
 `
 const Container = styled.div`
 `
