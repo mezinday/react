@@ -14,9 +14,30 @@ const ROOT = styled.div`
 const Container = styled.div`
 `
 const Box = styled.div`
+<<<<<<< HEAD
   width: 20.813rem;
   height: 12.25rem;
   margin: 7rem 2.625rem 0rem 0.938rem;
+=======
+  margin-top: 112px;
+  margin-left: 15px;
+  height: 196px;
+`
+
+const Oe9day = styled.div`
+  width: 10.65rem;
+  height: 8.1312rem;
+  flex-grow: 0;
+  font-family: Montserrat_Medium;
+  font-size: 48px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.15;
+  letter-spacing: -2.4px;
+  text-align: left;
+  color: #000;
+>>>>>>> aaccbc686d26f77ac883bc821c9a38d2773f6e93
 `
 const Ellipse = styled.div`
   width: 9.75rem;

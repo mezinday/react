@@ -16,8 +16,8 @@ const App = () => {
     <Store>
       <Switch>
         <Route path="/main" exact component={Main} />
-        <Route path="/sub1" component={Sub1} />
-        <Route path="/sub2" component={Sub2} />
+        <Route path="/sub1" exact component={Sub1} />
+        <Route path="/sub2" exact component={Sub2} />
         <Route path="/sub3" exact component={Sub3} />
         <Route path="/sub4" exact component={Sub4} />
         <Route path="/sub5" exact component={Sub5} />

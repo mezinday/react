@@ -6,7 +6,7 @@ import Footer from './Common/Footer';
 import { Context } from '../store/Store';
 import { useHistory } from 'react-router-dom';
 import '../static/fonts/font.css';
-import mezin0 from '../image/mezin0.png';
+import mezin1 from '../image/mezin1.svg';
 const ROOT = styled.div`
     display: flex;
     justify-content: center;
@@ -20,11 +20,10 @@ const Box = styled.div`
     margin: 7rem 0 0 0.938rem;
     height: 12.25rem;
 `; 
-const Background = styled.img`
+const Background = styled.div`
     margin: 5.125rem 0.938rem 0rem;
     width: 22.5rem;
     height: 17.563rem;
-    //background: url(../image/mezin0.png);
 `;
 const PaperContainer = styled.textarea`
     width: 100%;
@@ -50,7 +49,7 @@ const FooterContainer = styled.div`
     margin: 3.813rem;
 `;
 const letterList = [
-    mezin0, mezin0, mezin0, mezin0, mezin0
+    mezin1, mezin1, mezin1, mezin1, mezin1
 ]
 const index = () => {
     const context = useContext(Context);
