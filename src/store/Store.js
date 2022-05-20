@@ -14,7 +14,7 @@ const Store = ({children}) => {
             emoji, setEmoji 
             }}>
             {children}
-        /</Context.Provider>
+        </Context.Provider>
     );
 }
 export default Store;
