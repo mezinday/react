@@ -30,7 +30,7 @@ const Oe9day = styled.div`
   width: 10.65rem;
   height: 8.1312rem;
   flex-grow: 0;
-  font-family: Montserrat;
+  font-family: Montserrat_Medium;
   font-size: 48px;
   font-weight: 500;
   font-stretch: normal;
