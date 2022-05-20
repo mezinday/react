@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Title from './Common/Title';
 import Header from './Common/Header';
@@ -15,8 +16,9 @@ const Box = styled.div`
 const index = () => {
     const context = useContext(Context);
     const {setPaper} = context;
+    const history = useHistory();
     const didTapNext = () => {
-        alert("hello")
+        history.push("/sub2");
     }
     return (
         <>

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Title from './Common/Title';
 import Header from './Common/Header';
 import { Context } from '../store/Store';
+import { useHistory } from 'react-router-dom';
 
 import '../static/fonts/font.css';
 
@@ -36,7 +37,10 @@ const didTapNext = () => {
 const index = () => {
     const [count, setCount] = useState(0);
     const [letter, setLetter] = useState([]);
-
+    const history = useHistory();
+    const didTapNext = () => {
+        history.push("/main");
+    }
     return (
         <>
             <Header/>

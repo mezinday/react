@@ -6,6 +6,7 @@ import Title from './Common/Title';
 import Footer from './Common/Footer';
 import Header from './Common/Header';
 import { Context } from '../store/Store';
+import { useHistory } from 'react-router-dom';
 
 import emoji1 from'../image/emoji/emoji1.png';
 import emoji2 from'../image/emoji/emoji2.png';
@@ -102,12 +103,13 @@ const emojiList2 = [
     emoji4, emoji5
 ]
 const index = () => {
+    const history = useHistory();
     const context = useContext(Context);
     const {name, setName} = context;
     const {emoji, setEmoji} = context;
 
     const didTapNext = () => {
-        alert(name);
+        history.push("/sub3")
     }
     return (
         <TOP>

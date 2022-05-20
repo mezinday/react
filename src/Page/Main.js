@@ -6,7 +6,7 @@ import "../static/fonts/font.css";
 import Title from './Common/Title';
 
 const Wrapper = styled.div`
-  width: 100%;
+
 `
 
 const MainComment = styled.div`
@@ -52,23 +52,22 @@ const Ellipse = styled.div`
 `
 
 const Ellipse2 = styled.div`
-  width: 9.75rem;
+  width: 13.2rem;
   height: 5.1875rem;
   flex-grow: 0;
-  margin-left: 15px;
-  padding: 17.4px 20.1px 23.4px 22.5px;
+  padding: 17.4px 20.1px 17.4px 22.5px;
   border-radius: 90px;
   border: solid 4px #000;
   transform: rotate(-30deg);
   background-color: #fff;
+  margin-top: 45px;
 `
 
 const Ellipse3 = styled.button`
   width: 22.5rem;
-  height: 5.1875rem;
   flex-grow: 0;
-  margin: 2.1px 15px 190px;
-  padding: 14px 32px;
+  margin: 2.1px 15px;
+  padding: 14px 32px 14px 32px;
   border-radius: 90px;
   border: solid 4px #000;
   background-color: #d9fe96;
@@ -87,6 +86,46 @@ const DDay = styled.div`
   text-align: left;
   color: #000;
 `
+const Ellipse4 = styled.div`
+  width: 15.95rem;
+  margin: 15px 0 18px 15px;
+  padding: 14px 23px;
+  border-radius: 90px;
+  border: solid 4px #000;
+  background-color: #fff;
+  font-family: Montserrat_Medium;
+  font-size: 48px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.15;
+  letter-spacing: -2.4px;
+  text-align: left;
+  color: #000;
+`
+
+const Ellipse5 = styled.div`
+  width: 6.25rem;
+  margin: 18px 3px;
+  padding: 14px;
+  padding-left: 18px;
+  border-radius: 90px;
+  border: solid 4px #000;
+  background-color: #fff;
+  font-family: Montserrat_Medium;
+  font-size: 48px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.15;
+  letter-spacing: -2.4px;
+  text-align: left;
+  color: #000;
+`
+
+const Top = styled.div`
+  display: flex;
+`
 
 const Letter = styled.div`
   width: 18.5rem;
@@ -102,6 +141,10 @@ const Letter = styled.div`
   color: #000;
 `
 
+const Bottom = styled.div`
+  display: flex;
+`
+
 
 const index = () => {
 
@@ -109,7 +152,7 @@ const index = () => {
 
   const sendLetter = async () => {
     try {
-      history.push("/sub2");
+      history.push("/sub1");
     } catch (e) {
     }
   };
@@ -123,15 +166,29 @@ const index = () => {
         <Title title={"BIRTHDAY"}/>
         <Title title={"MEZIN!"}/>
       </Box>
-      <Ellipse> <DDay>D-19</DDay></Ellipse>
-      <Ellipse2>
-        <Oe9day>
-        oe9day
-        </Oe9day>
-      </Ellipse2>
+      <Top>
+        <Ellipse>
+          <DDay>
+            D-19
+          </DDay>
+        </Ellipse>
+        <Ellipse2>
+          <Oe9day>
+          oe9day
+          </Oe9day>
+        </Ellipse2>
+      </Top>
       <Ellipse3 onClick={sendLetter}>
         <Letter>Send a Letter</Letter>
       </Ellipse3>
+      <Bottom>
+        <Ellipse4>
+          Received
+        </Ellipse4>
+        <Ellipse5>
+          24
+        </Ellipse5>
+      </Bottom>
     </Wrapper>
   )
 }
