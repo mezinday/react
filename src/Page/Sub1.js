@@ -9,11 +9,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
 import '../static/fonts/font.css';
-import mezin1 from '../image/mezin1.svg';
-import mezin2 from '../image/mezin2.svg';
-import mezin3 from '../image/mezin3.svg';
-import mezin4 from '../image/mezin4.svg';
-import mezin5 from '../image/mezin5.svg';
+import mezin1 from '../image/mezin1.png';
+import mezin2 from '../image/mezin2.png';
+import mezin3 from '../image/mezin3.png';
+import mezin4 from '../image/mezin4.png';
+import mezin5 from '../image/mezin5.png';
 
 const ROOT = styled.div`
     display: flex;
