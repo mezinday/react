@@ -78,9 +78,9 @@ const index = () => {
         <Title title={"LETTER."} />
       </Box>
       <LetterContainer>
-        <Letter src={letterList[3]}></Letter>
+        <Letter src={letterList[paper]}></Letter>
         <TextArea
-          paper={3}
+          paper={paper}
           placeholder="여기에 입력하세요"
           value={letter}
           onChange={(e) => setLetter(e.target.text)}

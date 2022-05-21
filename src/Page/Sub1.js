@@ -47,6 +47,7 @@ const index = () => {
       </Box>
       <Swiper
         slidesPerView={1}
+        onSlideChange={(e) => setPaper(e.activeIndex)}
         style={{
           width: "22.5rem",
           height: "17.563rem",
