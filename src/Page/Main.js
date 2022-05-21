@@ -1,44 +1,15 @@
-import React, {useState, useEffect} from 'react'
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import Header from './Common/Header';
+import Header from "./Common/Header";
 import "../static/fonts/font.css";
-import Title from './Common/Title';
+import Title from "./Common/Title";
 
-const ROOT = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-`;
-const Container = styled.div`
-`
 const Box = styled.div`
-<<<<<<< HEAD
   width: 20.813rem;
   height: 12.25rem;
   margin: 7rem 2.625rem 0rem 0.938rem;
-=======
-  margin-top: 112px;
-  margin-left: 15px;
-  height: 196px;
-`
-
-const Oe9day = styled.div`
-  width: 10.65rem;
-  height: 8.1312rem;
-  flex-grow: 0;
-  font-family: Montserrat_Medium;
-  font-size: 48px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.15;
-  letter-spacing: -2.4px;
-  text-align: left;
-  color: #000;
->>>>>>> aaccbc686d26f77ac883bc821c9a38d2773f6e93
-`
+`;
 const Ellipse = styled.div`
   width: 9.75rem;
   height: 5.188rem;
@@ -47,7 +18,7 @@ const Ellipse = styled.div`
   border-radius: 90px;
   border: solid 4px #000;
   background-color: #fff;
-`
+`;
 const Ellipse2 = styled.div`
   display: flex;
   align-items: center;
@@ -70,8 +41,8 @@ const Ellipse2 = styled.div`
   letter-spacing: -2.4px;
   text-align: left;
   color: #000;
-`
-const Ellipse3 = styled.button` 
+`;
+const Ellipse3 = styled.button`
   width: 22.5rem;
   height: 5.188rem;
   flex-grow: 0;
@@ -80,7 +51,7 @@ const Ellipse3 = styled.button`
   border-radius: 90px;
   border: solid 4px #000;
   background-color: #d9fe96;
-`
+`;
 
 const DDay = styled.div`
   width: 6.125rem;
@@ -94,7 +65,7 @@ const DDay = styled.div`
   letter-spacing: -2.4px;
   text-align: left;
   color: #000;
-`
+`;
 const Ellipse4 = styled.div`
   width: 16.313rem;
   height: 5.188rem;
@@ -104,7 +75,7 @@ const Ellipse4 = styled.div`
   border: solid 4px #000;
   background-color: #fff;
   font-family: Montserrat_Medium;
-  font-size: 48px;
+  font-size: 3rem;
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
@@ -115,7 +86,7 @@ const Ellipse4 = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 const Ellipse5 = styled.div`
   width: 5.875rem;
@@ -126,7 +97,7 @@ const Ellipse5 = styled.div`
   border: solid 4px #000;
   background-color: #fff;
   font-family: Montserrat_Medium;
-  font-size: 48px;
+  font-size: 3rem;
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
@@ -137,17 +108,17 @@ const Ellipse5 = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 const Top = styled.div`
   display: flex;
-`
+`;
 
 const Letter = styled.div`
   width: 18.5rem;
   height: 3.4375rem;
   font-family: Montserrat_Medium;
-  font-size: 48px;
+  font-size: 3rem;
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
@@ -157,22 +128,22 @@ const Letter = styled.div`
   color: #000;
   display: flex;
   align-items: center;
-  justify-content: center; 
-`
+  justify-content: center;
+`;
 
 const Bottom = styled.div`
   display: flex;
-`
+`;
 
 const get_dday = () => {
   var mezin_day = new Date("May 29, 2022 23:59:59").getTime();
   var today = new Date().getTime();
   var diff = mezin_day - today;
-  return Math.floor(diff / (1000*60*60*24));
-}
+  return Math.floor(diff / (1000 * 60 * 60 * 24));
+};
 const index = () => {
   const history = useHistory();
-  const dday = (get_dday() < 0 ? -get_dday() : get_dday());
+  const dday = get_dday() < 0 ? -get_dday() : get_dday();
   const [letters, setLetters] = useState([]);
 
   useEffect(() => {
@@ -181,44 +152,35 @@ const index = () => {
   const sendLetter = async () => {
     try {
       history.push("/sub1");
-    } catch (e) {
-    }
+    } catch (e) {}
   };
 
-
   return (
-    <ROOT>
-      <Container>
-        <Header/>
-        <Box>
-          <Title title={"HAPPY"}/>
-          <Title title={"BIRTHDAY"}/>
-          <Title title={"MEZIN!"}/>
-        </Box>
-        <Top>
-          <Ellipse>
-            <DDay>
-              D{get_dday() < 0 ? "+" : "-"}{dday == 0 ? "Day" : dday}
-            </DDay>
-          </Ellipse>
-          <Ellipse2>
-            oe9day
-          </Ellipse2>
-        </Top>
-        <Ellipse3 onClick={sendLetter}>
-          <Letter>Send a Letter</Letter>
-        </Ellipse3>
-        <Bottom>
-          <Ellipse4>
-            Received
-          </Ellipse4>
-          <Ellipse5>
-            {letters.length}
-          </Ellipse5>
-        </Bottom>
-      </Container>
-    </ROOT>
-  )
-}
+    <>
+      <Header />
+      <Box>
+        <Title title={"HAPPY"} />
+        <Title title={"BIRTHDAY"} />
+        <Title title={"MEZIN!"} />
+      </Box>
+      <Top>
+        <Ellipse>
+          <DDay>
+            D{get_dday() < 0 ? "+" : "-"}
+            {dday == 0 ? "Day" : dday}
+          </DDay>
+        </Ellipse>
+        <Ellipse2>oe9day</Ellipse2>
+      </Top>
+      <Ellipse3 onClick={sendLetter}>
+        <Letter>Send a Letter</Letter>
+      </Ellipse3>
+      <Bottom>
+        <Ellipse4>Received</Ellipse4>
+        <Ellipse5>{letters.length}</Ellipse5>
+      </Bottom>
+    </>
+  );
+};
 
-export default index
+export default index;
