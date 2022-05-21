@@ -103,7 +103,7 @@ const OkButton = styled.div`
     width: 1.75rem;
     height: 1.875rem;
     margin: 30px 126px 0 0;
-    font-family: Montserrat;
+    font-family: Montserrat_SemiBold;
     font-size: 15px;
     font-weight: 600;
     font-stretch: normal;
@@ -118,7 +118,7 @@ const NoButton = styled.div`
     width: 1.5625rem;
     height: 1.875rem;
     margin: 30px 3px 0 0;
-    font-family: Montserrat;
+    font-family: Montserrat_SemiBold;
     font-size: 15px;
     font-weight: 600;
     font-stretch: normal;
