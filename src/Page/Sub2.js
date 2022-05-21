@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../static/fonts/font.css";
 
 import styled from "styled-components";
@@ -72,6 +72,9 @@ const EmojiBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+
+
 `;
 const Emoji = styled.img`
   width: ${(props) => `${(emojiWidth[props.index])}rem`};
@@ -92,6 +95,15 @@ const FooterContainer = styled.div`
   margin-top: 3.813rem;
   margin-bottom: 2rem;
 `;
+
+const Circle = styled.div`
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 5px solid #D9FE96;
+  border-radius: 50%;
+`
+
 const emojiList1 = [emoji1, emoji2, emoji3];
 const emojiList2 = [emoji4, emoji5];
 const emojiWidth = [5.75, 6.375, 4.375, 2.188, 5.688, 4.375]
@@ -102,6 +114,13 @@ const index = () => {
   const context = useContext(Context);
   const { name, setName } = context;
   const { emoji, setEmoji } = context;
+  const [ circle, setCircle ] = useState();
+  console.log(circle);
+
+  const clickHandler = (id) => {
+    setEmoji(id);
+    setCircle(id);
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -131,18 +150,21 @@ const index = () => {
       <EmojiConstainer>
         {emojiList1.map((emo, id) => (
           <EmojiBox>
-            <Emoji index={id} src={emo} onClick={() => setEmoji(id)}></Emoji>
+            <Emoji index={id} src={emo} onClick={() => clickHandler(id)}></Emoji>
+            {circle === id ? <Circle/> : <></>}
           </EmojiBox>
         ))}
       </EmojiConstainer>
       <EmojiConstainer>
         {emojiList2.map((emo, id) => (
           <EmojiBox>
-            <Emoji index={id + 3} src={emo} onClick={() => setEmoji(id + 3)}></Emoji>
+            <Emoji index={id + 3} src={emo} onClick={() => clickHandler(id + 3)}></Emoji>
+            {circle === id + 3 ? <Circle/> : <></>}
           </EmojiBox>
         ))}
         <EmojiBox>
-          <NONE onClick={() => setEmoji(5)}>NONE</NONE>
+          <NONE onClick={() => clickHandler(5)}>NONE</NONE>
+          {circle === 5 ? <Circle/> : <></>}
         </EmojiBox>
       </EmojiConstainer>
 
