@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Title from "./Common/Title";
 import Header from "./Common/Header";
 import Footer from "./Common/Footer";
+import Subtitle from "./Common/Subtitle";
 import { Context } from "../store/Store";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
@@ -44,6 +45,7 @@ const index = () => {
         <Title title={"SELECT"} />
         <Title title={"THE"} />
         <Title title={"PAPER."} />
+        <Subtitle title={"편지지를 선택하세요"}/>
       </Box>
       <Swiper
         slidesPerView={1}

@@ -1,8 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
+import axios from "axios";
+import dotenv from "dotenv";
+dotenv.config();
+
 import Title from "./Common/Title";
 import Header from "./Common/Header";
 import Footer from "./Common/Footer";
+import Subtitle from "./Common/Subtitle";
 import { Context } from "../store/Store";
 import { useHistory } from "react-router-dom";
 import "../static/fonts/font.css";
@@ -57,96 +62,112 @@ const FooterContainer = styled.div`
 `;
 
 const Background = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(0,0,0,0.50);
-    z-index: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 0;
 `;
 
 const ModalContainer = styled.div`
-    position: fixed;
-    transform: translate(-50%, -50%);
-    width: 19.75rem;
-    height: 11.875rem;
-    padding: 50px 67px;
-    border: solid 3px #000;
-    background-color: #fff;
-    border-radius: 90px;
-    top: 54%;
-    left: 50%;
-    text-align: center;
-
+  position: fixed;
+  transform: translate(-50%, -50%);
+  width: 19.75rem;
+  height: 11.875rem;
+  padding: 50px 67px;
+  border: solid 3px #000;
+  background-color: #fff;
+  border-radius: 90px;
+  top: 54%;
+  left: 50%;
+  text-align: center;
 `;
 
 const ModalComment = styled.div`
-    width: 11.375rem;
-    height: 1.875rem;
-    margin: 0 0 0;
-    font-family: Montserrat_SemiBold;
-    font-size: 15px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 2;
-    letter-spacing: -0.75px;
-    text-align: left;
-    color: #000;
-`
+  width: 11.375rem;
+  height: 1.875rem;
+  margin: 0 0 0;
+  font-family: Montserrat_SemiBold;
+  font-size: 15px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2;
+  letter-spacing: -0.75px;
+  text-align: left;
+  color: #000;
+`;
 
 const Wrapper = styled.div`
-    display: flex;
-`
+  display: flex;
+`;
 const OkButton = styled.div`
-    width: 1.75rem;
-    height: 1.875rem;
-    margin: 30px 126px 0 0;
-    font-family: Montserrat_SemiBold;
-    font-size: 15px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 2;
-    letter-spacing: -0.75px;
-    text-align: left;
-    color: #000;
-`
+  width: 1.75rem;
+  height: 1.875rem;
+  margin: 30px 126px 0 0;
+  font-family: Montserrat_SemiBold;
+  font-size: 15px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2;
+  letter-spacing: -0.75px;
+  text-align: left;
+  color: #000;
+`;
 
 const NoButton = styled.div`
-    width: 1.5625rem;
-    height: 1.875rem;
-    margin: 30px 3px 0 0;
-    font-family: Montserrat_SemiBold;
-    font-size: 15px;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 2;
-    letter-spacing: -0.75px;
-    text-align: left;
-    color: #000;
-`
+  width: 1.5625rem;
+  height: 1.875rem;
+  margin: 30px 3px 0 0;
+  font-family: Montserrat_SemiBold;
+  font-size: 15px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2;
+  letter-spacing: -0.75px;
+  text-align: left;
+  color: #000;
+`;
 
 const letterList = [mezin1, mezin2, mezin3, mezin4, mezin5];
 const index = () => {
   const context = useContext(Context);
-  const { paper } = context;
+  const { name, emoji, paper } = context;
   const [letter, setLetter] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const history = useHistory();
 
   const modalToggle = () => {
-      setModalOpen(!modalOpen);
-  }
-
-
+    setModalOpen(!modalOpen);
+  };
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const postLetter = async () => {
+    try {
+      const response = await axios.post(
+        process.env.REACT_APP_API_ROOT + "api/v1/letters/create",
+        {
+          name: name,
+          emoji: emoji,
+          image: paper,
+          content: letter,
+        }
+      );
+      console.log(response);
+    } catch (e) {
+      setError(true);
+    }
+  };
   const didTapNext = () => {
+    postLetter();
     history.push("/sub4");
   };
   return (
@@ -156,6 +177,7 @@ const index = () => {
         <Title title={"SEND"} />
         <Title title={"YOUR"} />
         <Title title={"LETTER."} />
+        <Subtitle title={"편지내용을 입력하세요"} />
       </Box>
       <LetterContainer>
         <Letter src={letterList[paper]}></Letter>
@@ -163,26 +185,31 @@ const index = () => {
           paper={paper}
           placeholder="여기에 입력하세요"
           value={letter}
-          onChange={(e) => setLetter(e.target.text)}
+          onChange={(e) => setLetter(e.target.value)}
         ></TextArea>
       </LetterContainer>
 
       <FooterContainer>
         <Footer title={"NEXT"} onClick={modalToggle} />
       </FooterContainer>
-      {modalOpen ?
+      {modalOpen ? (
         <Background>
-            <ModalContainer>
-                <ModalComment>
-                    편지작성을 완료하시겠습니까?
-                </ModalComment>
-                <Wrapper>
-                <OkButton onClick={didTapNext}>YES</OkButton>
-                <NoButton onClick={modalToggle}>NO</NoButton>
-                </Wrapper>
-            </ModalContainer>
-        </Background> : null
-      }
+          <ModalContainer>
+            <ModalComment>편지작성을 완료하시겠습니까?</ModalComment>
+            <Wrapper>
+              <OkButton onClick={didTapNext}>YES</OkButton>
+              <NoButton onClick={modalToggle}>NO</NoButton>
+            </Wrapper>
+          </ModalContainer>
+        </Background>
+      ) : null}
+      {error ? (
+        <Background>
+          <ModalContainer>
+            <ModalComment>에러 발생!</ModalComment>
+          </ModalContainer>
+        </Background>
+      ) : null}
     </>
   );
 };
