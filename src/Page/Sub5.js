@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import SwiperCore, { Navigation } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper-bundle.min.css";
+import "swiper/swiper.min.css";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -13,6 +17,9 @@ import emoji2 from "../image/emoji/emoji2.png";
 import emoji3 from "../image/emoji/emoji3.png";
 import emoji4 from "../image/emoji/emoji4.png";
 import emoji5 from "../image/emoji/emoji5.png";
+import prev from "../image/prev.png";
+import next from "../image/next.png";
+
 import "../static/fonts/font.css";
 
 const Box = styled.div`
@@ -33,22 +40,29 @@ const Text = styled.div`
   text-align: left;
   color: #000;
 `;
+const SwiperContainer = styled.div`
+  width: 24.439rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6.25rem;
+  margin-bottom: 4.062rem;
+`;
 const PreviewContainer = styled.div`
-  width: 22.439rem; 
-  margin: 4.063rem 0.938rem 0 0.938rem;
+  width: 19.439rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
 `;
 const Circle = styled.div`
-  position: relative; 
+  position: relative;
   &:nth-child(3n + 2) {
-    margin: 0 0.625rem;
+    margin: 0 0.562rem;
   }
   margin: 0.625rem 0;
-  width: 7.063rem;
-  height: 7.063rem;
+  width: 6.063rem;
+  height: 6.063rem;
   border-radius: 90px;
   border: solid 4px #000;
   background-color: #fff;
@@ -74,19 +88,33 @@ const Name = styled.div`
   text-align: left;
   color: #000;
 `;
+const NavigationButton = styled.div`
+  width: 8px;
+  height: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const emojiList = [emoji1, emoji2, emoji3, emoji4, emoji5];
-const emojiWidth = [5.75, 6.375, 4.375, 1.688, 5.688, 4.375];
-const emojiHeight = [1.25, 0.5, 0.563, 2.375, 2.563, 3.125];
+const emojiWidth = [4.938, 4.75, 3.75, 1.438, 4.938, 4.938];
+const emojiHeight = [1.125, 0.375, 0.5, 2, 2.188, 2.188];
 const index = () => {
+  SwiperCore.use([Navigation]);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [count, setCount] = useState(0);
   const [letterList, setLetterList] = useState([]);
+  const [filteredList, setFilteredList] = useState([]);
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
   const history = useHistory();
 
   const didTapNext = () => {
     history.push("/main");
   };
+
   const fetchLetter = async () => {
     try {
       setError(false);
@@ -96,11 +124,18 @@ const index = () => {
       );
       setLetterList(data.data);
       setCount(data.count);
+
+      var temp = [];
+      for (let i = 0; i < data.count; i += 9) {
+        temp.push(data.data.slice(i, i + 9));
+      }
+      setFilteredList(temp);
     } catch (e) {
       setError(true);
     }
     setLoading(false);
   };
+
   useEffect(() => {
     fetchLetter();
   }, []);
@@ -137,14 +172,53 @@ const index = () => {
       <TextContainer>
         <Text>편지는 5월 29일 00:00 부터 볼 수 있어요</Text>
       </TextContainer>
-      <PreviewContainer>
-        {letterList.map(({emoji, name}, id) => (
-          <Circle key={id}>
-            {emoji < 5 ? <Emoji index={emoji} src={emojiList[emoji]} /> : null}
-            <Name>{name}</Name>
-        </Circle>
-        ))}
-      </PreviewContainer>
+      <SwiperContainer>
+        <NavigationButton ref={prevRef}>
+          <img src={prev} width={8} height={15} alt="prev" />
+        </NavigationButton>
+        <Swiper
+          spaceBetween={5}
+          centeredSlides={true}
+          slidesPerView={1}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={{
+            prevEl: prevRef.current,
+            nextEl: nextRef.current,
+          }}
+          onSwiper={(swiper) => {
+            if (typeof swiper.params.navigation !== "boolean") {
+              if (swiper.params.navigation) {
+                swiper.params.navigation.prevEl = prevRef.current;
+                swiper.params.navigation.nextEl = nextRef.current;
+              }
+            }
+            swiper.navigation.update();
+          }}
+          style={{
+            width: "19.439rem",
+          }}
+        >
+          {filteredList.map((arr) => (
+            <SwiperSlide>
+              <PreviewContainer>
+                {arr.map(({ emoji, name }, id) => (
+                  <Circle key={id}>
+                    {emoji < 5 ? (
+                      <Emoji index={emoji} src={emojiList[emoji]} />
+                    ) : null}
+                    <Name>{name}</Name>
+                  </Circle>
+                ))}
+              </PreviewContainer>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <NavigationButton ref={nextRef}>
+          <img src={next} width={8} height={15} alt="next" />
+        </NavigationButton>
+      </SwiperContainer>
     </>
   );
 };
