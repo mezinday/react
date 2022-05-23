@@ -153,7 +153,7 @@ const index = () => {
   const postLetter = async () => {
     try {
         await axios.post(
-        process.env.REACT_APP_API_ROOT + "api/v1/letters/create",
+        "http://52.79.128.156:3000/api/v1/letters/create",
         {
           name: name,
           emoji: emoji,

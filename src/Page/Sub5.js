@@ -129,7 +129,7 @@ const index = () => {
       setError(false);
       setLoading(true);
       const { data } = await axios.get(
-        process.env.REACT_APP_API_ROOT + "api/v1/letters"
+        "http://52.79.128.156:3000/api/v1/letters"
       );
       setCount(data.count);
       var temp = [];
