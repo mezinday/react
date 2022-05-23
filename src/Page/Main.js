@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./Common/Header";
@@ -134,6 +135,29 @@ const Letter = styled.div`
 const Bottom = styled.div`
   display: flex;
 `;
+const FotterContainer = styled.div`
+  margin: 5.813rem 0 0.625rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Fotter = styled.div`
+  width: 3rem;
+  height: 0.938rem;
+  font-family: Montserrat_Light;
+  font-size: 0.5rem;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.88;
+  letter-spacing: -0.4px;
+  text-align: left;
+  color: #d4d4d4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const get_dday = () => {
   var mezin_day = new Date("May 29, 2022 23:59:59").getTime();
@@ -144,16 +168,55 @@ const get_dday = () => {
 const index = () => {
   const history = useHistory();
   const dday = get_dday() < 0 ? -get_dday() : get_dday();
-  const [letters, setLetters] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [letterCount, setLetterCount] = useState(0);
+
+  const fetchLetter = async () => {
+    try {
+      setError(false);
+      setLoading(true);
+      const {
+        data: { count },
+      } = await axios.get("http://52.79.128.156:3000/api/v1/letters/count");
+      setLetterCount(count);
+    } catch (e) {
+      setError(true);
+    }
+    setLoading(false);
+  };
 
   useEffect(() => {
-    //request('get','','').then(res => setLetters(res));
+    fetchLetter();
   }, []);
+
   const sendLetter = async () => {
     try {
       history.push("/sub1");
     } catch (e) {}
   };
+
+  if (loading) {
+    return (
+      <>
+        <Header />
+        <Box>
+          <Title title={"로딩중...."}></Title>
+        </Box>
+      </>
+    );
+  }
+  if (error) {
+    return (
+      <>
+        <Header />
+        <Box>
+          <Title title={"에러가"}></Title>
+          <Title title={"발생했습니다."}></Title>
+        </Box>
+      </>
+    );
+  }
 
   return (
     <>
@@ -177,8 +240,11 @@ const index = () => {
       </Ellipse3>
       <Bottom>
         <Ellipse4>Received</Ellipse4>
-        <Ellipse5>{letters.length}</Ellipse5>
+        <Ellipse5>{letterCount}</Ellipse5>
       </Bottom>
+      <FotterContainer>
+        <Fotter>©YUNKIMJO</Fotter>
+      </FotterContainer>
     </>
   );
 };

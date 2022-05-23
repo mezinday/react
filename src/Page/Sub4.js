@@ -26,7 +26,7 @@ const Text = styled.div`
   color: #000;
 `;
 const FooterContainer = styled.div`
-  margin-top: 3.813rem;
+  margin-top: 18.25rem;
   margin-bottom: 2rem;
 `;
 const index = () => {

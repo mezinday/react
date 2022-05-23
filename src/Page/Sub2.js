@@ -60,7 +60,6 @@ const Input = styled.input`
 `;
 const EmojiConstainer = styled.div`
   width: 22.5rem;
-  margin: 1.438rem 0.938rem 0rem 0.938rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -145,7 +144,7 @@ const index = () => {
       ></Input>
 
       <Text2>EMOJI</Text2>
-      <EmojiConstainer>
+      <EmojiConstainer style={{margin: "1.438rem 0.938rem 0rem 0.938rem"}}>
         {emojiList1.map((emo, id) => (
           <EmojiBox>
             <Emoji
@@ -158,7 +157,7 @@ const index = () => {
           </EmojiBox>
         ))}
       </EmojiConstainer>
-      <EmojiConstainer>
+      <EmojiConstainer style={{margin: "0rem 0.938rem 0rem 0.938rem"}}>
         {emojiList2.map((emo, id) => (
           <EmojiBox>
             <Emoji
