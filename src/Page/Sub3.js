@@ -152,7 +152,7 @@ const index = () => {
 
   const postLetter = async () => {
     try {
-      const response = await axios.post(
+        await axios.post(
         process.env.REACT_APP_API_ROOT + "api/v1/letters/create",
         {
           name: name,
@@ -161,7 +161,6 @@ const index = () => {
           content: letter,
         }
       );
-      console.log(response);
     } catch (e) {
       setError(true);
     }

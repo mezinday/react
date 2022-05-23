@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import SwiperCore, { Navigation } from "swiper";
@@ -17,8 +17,8 @@ import emoji2 from "../image/emoji/emoji2.png";
 import emoji3 from "../image/emoji/emoji3.png";
 import emoji4 from "../image/emoji/emoji4.png";
 import emoji5 from "../image/emoji/emoji5.png";
-import prev from "../image/prev.png";
-import next from "../image/next.png";
+import prev from "../image/prev.svg";
+import next from "../image/next.svg";
 
 import "../static/fonts/font.css";
 
@@ -41,28 +41,31 @@ const Text = styled.div`
   color: #000;
 `;
 const SwiperContainer = styled.div`
-  width: 24.439rem;
+  width: 22.563rem;
+  margin: 5rem 0.938rem 4.062rem 0.938rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 6.25rem;
-  margin-bottom: 4.062rem;
+  .swiper {
+    &-button-disabled {
+      visibility: hidden;
+    }
+  }
 `;
 const PreviewContainer = styled.div`
-  width: 19.439rem;
+  width: 20.563rem;
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
 `;
 const Circle = styled.div`
   position: relative;
+  margin: 0.562rem 0.3125rem;
   &:nth-child(3n + 2) {
     margin: 0 0.562rem;
   }
-  margin: 0.625rem 0;
-  width: 6.063rem;
-  height: 6.063rem;
+  width: 6rem;
+  height: 6rem;
   border-radius: 90px;
   border: solid 4px #000;
   background-color: #fff;
@@ -88,17 +91,23 @@ const Name = styled.div`
   text-align: left;
   color: #000;
 `;
-const NavigationButton = styled.div`
-  width: 8px;
-  height: 15px;
+const NavigationButton = styled.button`
+  width: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: none;
+  padding: 0;
+  background: none;
 `;
-
+const SwiperButtonImage = styled.img`
+  width: 1rem;
+  height: 2rem;
+`;
 const emojiList = [emoji1, emoji2, emoji3, emoji4, emoji5];
 const emojiWidth = [4.938, 4.75, 3.75, 1.438, 4.938, 4.938];
 const emojiHeight = [1.125, 0.375, 0.5, 2, 2.188, 2.188];
+
 const index = () => {
   SwiperCore.use([Navigation]);
 
@@ -106,7 +115,7 @@ const index = () => {
   const [error, setError] = useState(false);
   const [count, setCount] = useState(0);
   const [letterList, setLetterList] = useState([]);
-  const [filteredList, setFilteredList] = useState([]);
+  const [swiperSetting, setSwiperSetting] = useState(null);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const history = useHistory();
@@ -122,14 +131,12 @@ const index = () => {
       const { data } = await axios.get(
         process.env.REACT_APP_API_ROOT + "api/v1/letters"
       );
-      setLetterList(data.data);
       setCount(data.count);
-
       var temp = [];
       for (let i = 0; i < data.count; i += 9) {
         temp.push(data.data.slice(i, i + 9));
       }
-      setFilteredList(temp);
+      setLetterList(temp);
     } catch (e) {
       setError(true);
     }
@@ -139,6 +146,36 @@ const index = () => {
   useEffect(() => {
     fetchLetter();
   }, []);
+
+  useEffect(() => {
+    if (!swiperSetting) {
+      setSwiperSetting({
+        spaceBetween: 5,
+        centeredSlides: true,
+        slidesPerView: 1,
+        pagination: {
+          clickable: true,
+        },
+        navigation: {
+          prevEl: prevRef.current,
+          nextEl: nextRef.current,
+        },
+        onBeforeInit: (swiper) => {
+          setTimeout(() => {
+            if (typeof swiper.params.navigation !== "boolean") {
+              if (swiper.params.navigation) {
+                swiper.params.navigation.prevEl = prevRef.current;
+                swiper.params.navigation.nextEl = nextRef.current;
+              }
+            }
+            swiper.navigation.destroy();
+            swiper.navigation.init();
+            swiper.navigation.update();
+          });
+        },
+      });
+    }
+  }, [swiperSetting]);
 
   if (loading) {
     return (
@@ -174,49 +211,28 @@ const index = () => {
       </TextContainer>
       <SwiperContainer>
         <NavigationButton ref={prevRef}>
-          <img src={prev} width={8} height={15} alt="prev" />
+          <SwiperButtonImage src={prev} width={8} height={15} alt="prev" />
         </NavigationButton>
-        <Swiper
-          spaceBetween={5}
-          centeredSlides={true}
-          slidesPerView={1}
-          pagination={{
-            clickable: true,
-          }}
-          navigation={{
-            prevEl: prevRef.current,
-            nextEl: nextRef.current,
-          }}
-          onSwiper={(swiper) => {
-            if (typeof swiper.params.navigation !== "boolean") {
-              if (swiper.params.navigation) {
-                swiper.params.navigation.prevEl = prevRef.current;
-                swiper.params.navigation.nextEl = nextRef.current;
-              }
-            }
-            swiper.navigation.update();
-          }}
-          style={{
-            width: "19.439rem",
-          }}
-        >
-          {filteredList.map((arr) => (
-            <SwiperSlide>
-              <PreviewContainer>
-                {arr.map(({ emoji, name }, id) => (
-                  <Circle key={id}>
-                    {emoji < 5 ? (
-                      <Emoji index={emoji} src={emojiList[emoji]} />
-                    ) : null}
-                    <Name>{name}</Name>
-                  </Circle>
-                ))}
-              </PreviewContainer>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        {swiperSetting && (
+          <Swiper {...swiperSetting}>
+            {letterList.map((arr, id1) => (
+              <SwiperSlide key={id1}>
+                <PreviewContainer>
+                  {arr.map(({ emoji, name }, id) => (
+                    <Circle key={id}>
+                      {emoji < 5 ? (
+                        <Emoji index={emoji} src={emojiList[emoji]} />
+                      ) : null}
+                      <Name>{name}</Name>
+                    </Circle>
+                  ))}
+                </PreviewContainer>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
         <NavigationButton ref={nextRef}>
-          <img src={next} width={8} height={15} alt="next" />
+          <SwiperButtonImage src={next} alt="next" />
         </NavigationButton>
       </SwiperContainer>
     </>
