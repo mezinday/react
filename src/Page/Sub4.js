@@ -32,7 +32,7 @@ const FooterContainer = styled.div`
 const index = () => {
   const history = useHistory();
   const didTapNext = () => {
-    history.push("/sub5");
+    history.push("/main");
   };
   return (
     <>

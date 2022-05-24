@@ -32,7 +32,7 @@ const App = () => {
             <Route path="/sub2" exact component={Sub2} />
             <Route path="/sub3" exact component={Sub3} />
             <Route path="/sub4" exact component={Sub4} />
-            <Route path="/sub5" exact component={Sub5} />
+            <Route path="/zhcuhviq" exact component={Sub5} />
             <Redirect to="/main" />
           </Switch>
         </Store>
