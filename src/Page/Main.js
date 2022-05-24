@@ -87,6 +87,7 @@ const Ellipse4 = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 
 const Ellipse5 = styled.div`
@@ -190,6 +191,10 @@ const index = () => {
     fetchLetter();
   }, []);
 
+  const letterList = () => {
+    history.push("/letterList");
+  }
+
   const sendLetter = async () => {
     try {
       history.push("/sub1");
@@ -239,7 +244,7 @@ const index = () => {
         <Letter>Send a Letter</Letter>
       </Ellipse3>
       <Bottom>
-        <Ellipse4>Received</Ellipse4>
+        <Ellipse4 onClick={letterList}>Received</Ellipse4>
         <Ellipse5>{letterCount}</Ellipse5>
       </Bottom>
       <FotterContainer>
