@@ -118,7 +118,6 @@ const index = () => {
     setCircle(id);
   };
 
-  console.log(name)
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
