@@ -111,7 +111,7 @@ const index = () => {
   const context = useContext(Context);
   const { name, setName } = context;
   const { emoji, setEmoji } = context;
-  const [circle, setCircle] = useState();
+  const [circle, setCircle] = useState(-1);
 
   const clickHandler = (id) => {
     setEmoji(id);
@@ -122,7 +122,21 @@ const index = () => {
     window.scrollTo(0, 0);
   }, []);
   const didTapNext = () => {
-    history.push("/sub3");
+    if (circle === -1) {
+      alert("이모지를 선택해주세요.")
+    } else if (name === "") {
+      alert("이름을 입력해주세요");
+    } else if (name !== "") {
+      var str = name
+      var blank_pattern = /^\s+|\s+$/g;
+      if(str.replace(blank_pattern, '') == "" ){
+          alert('공백만 입력되었습니다.');
+      } else {
+        history.push("/sub3");
+      }
+    } else {
+      history.push("/sub3");
+    }
   };
   return (
     <>

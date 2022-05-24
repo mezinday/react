@@ -166,8 +166,14 @@ const index = () => {
     }
   };
   const didTapNext = () => {
-    postLetter();
-    history.push("/sub4");
+    var str = letter
+    var blank_pattern = /^\s+|\s+$/g;
+    if(str.replace(blank_pattern, '' ) == "" ){
+        alert('공백만 입력되었습니다.');
+    } else {
+      postLetter();
+      history.push("/sub4");
+    }
   };
   return (
     <>
