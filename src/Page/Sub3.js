@@ -137,13 +137,23 @@ const NoButton = styled.div`
 const letterList = [mezin1, mezin2, mezin3, mezin4, mezin5];
 const index = () => {
   useBeforeunload((event) => event.preventDefault())
-  const context = useContext(Context);
-  const { name, emoji, paper } = context;
-  const [letter, setLetter] = useState("");
+  var localContent = window.localStorage.getItem('content');
+  // const context = useContext(Context);
+  // const { name, emoji, paper } = context;
+
+  if (localContent === null) {
+    localContent = ""
+  }
+
+  const [letter, setLetter] = useState(localContent);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const history = useHistory();
+
+  let name = window.localStorage.getItem('name');
+  let emoji = window.localStorage.getItem('emoji');
+  let image = window.localStorage.getItem('image');
 
   const modalToggle = () => {
     setModalOpen(!modalOpen);
@@ -159,7 +169,7 @@ const index = () => {
         {
           name: name,
           emoji: emoji,
-          image: paper,
+          image: image,
           content: letter,
         }
       );
@@ -173,6 +183,7 @@ const index = () => {
     if(str.replace(blank_pattern, '' ) == "" ){
         alert('공백만 입력되었습니다.');
     } else {
+      window.localStorage.setItem('content', letter);
       postLetter();
       history.push("/sub4");
     }
@@ -187,9 +198,9 @@ const index = () => {
         <Subtitle title={"편지내용을 입력하세요"} />
       </Box>
       <LetterContainer>
-        <Letter src={letterList[paper]}></Letter>
+        <Letter src={letterList[image]}></Letter>
         <TextArea
-          paper={paper}
+          paper={image}
           placeholder="여기에 입력하세요"
           value={letter}
           onChange={(e) => setLetter(e.target.value)}

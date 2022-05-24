@@ -107,11 +107,25 @@ const emojiWidth = [5.75, 6.375, 4.375, 2.188, 5.688, 4.375];
 const emojiHeight = [1.25, 0.5, 0.563, 3.125, 2.563, 3.125];
 
 const index = () => {
+  var localName = window.localStorage.getItem('name');
+  const localEmoji = window.localStorage.getItem('emoji');
+
+  var intEmoji;
+  if (localEmoji === null) {
+    intEmoji = -1;
+  } else {
+    intEmoji = localEmoji * 1
+  }
+
+  if (localName === null) {
+    localName = "";
+  }
+  console.log(intEmoji)
   const history = useHistory();
-  const context = useContext(Context);
-  const { name, setName } = context;
-  const { emoji, setEmoji } = context;
-  const [circle, setCircle] = useState(-1);
+  const [ name, setName ] = useState(localName);
+  const [ emoji, setEmoji ] = useState(localEmoji);
+  const [circle, setCircle] = useState(intEmoji);
+
 
   const clickHandler = (id) => {
     setEmoji(id);
@@ -132,9 +146,13 @@ const index = () => {
       if(str.replace(blank_pattern, '') == "" ){
           alert('공백만 입력되었습니다.');
       } else {
+        window.localStorage.setItem('name', name);
+        window.localStorage.setItem('emoji', emoji);
         history.push("/sub3");
       }
     } else {
+      window.localStorage.setItem('name', name);
+      window.localStorage.setItem('emoji', emoji);
       history.push("/sub3");
     }
   };
@@ -153,6 +171,7 @@ const index = () => {
       <Input
         type="text"
         placeholder="이름"
+        value={name}
         maxLength={3}
         onChange={(e) => setName(e.target.value)}
       ></Input>
