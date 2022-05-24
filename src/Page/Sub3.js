@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import dotenv from "dotenv";
+import {useBeforeunload} from "react-beforeunload"
 dotenv.config();
 
 import Title from "./Common/Title";
@@ -135,6 +136,7 @@ const NoButton = styled.div`
 
 const letterList = [mezin1, mezin2, mezin3, mezin4, mezin5];
 const index = () => {
+  useBeforeunload((event) => event.preventDefault())
   const context = useContext(Context);
   const { name, emoji, paper } = context;
   const [letter, setLetter] = useState("");
