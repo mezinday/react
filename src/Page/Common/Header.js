@@ -23,7 +23,7 @@ const Vector = styled.div`
 const Header = () => {
   return (
     <>
-        <Header1>THESE LETTERS WILL BE DELIVERED TO MEZIN ON 5/27. SEND LOVE TO MEZIN! DON’T CRY MEZIN!!</Header1>
+        <Header1>THESE LETTERS WILL BE DELIVERED TO MEZIN ON 5/29. SEND LOVE TO MEZIN! DON’T CRY MEZIN!!</Header1>
         <Vector/>
     </>
   )
