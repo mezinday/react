@@ -120,7 +120,7 @@ const index = () => {
   if (localName === null) {
     localName = "";
   }
-  console.log(intEmoji)
+  
   const history = useHistory();
   const [ name, setName ] = useState(localName);
   const [ emoji, setEmoji ] = useState(localEmoji);
