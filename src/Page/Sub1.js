@@ -15,6 +15,7 @@ import mezin2 from "../image/mezin2.png";
 import mezin3 from "../image/mezin3.png";
 import mezin4 from "../image/mezin4.png";
 import mezin5 from "../image/mezin5.png";
+import selectImg from "../image/select.png";
 import prev from "../image/prev.svg";
 import next from "../image/next.svg";
 
@@ -32,24 +33,10 @@ const Letter = styled.img`
   height: 17.563rem;
 `;
 
-const Select = styled.div`
-  display: table;
+const Select = styled.img`
   position: absolute;
   width: 22.5rem;
   height: 17.563rem;
-
-  font-family: 'Montserrat_SemiBold';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 17.563rem;
-
-  text-align: center;
-  vertical-align: middle;
-  letter-spacing: -0.05em;
-
-  color: #D9FE96;
-  -webkit-text-stroke: 1px #000;
 `
 const SwiperContainer = styled.div`
   position: relative;
@@ -80,48 +67,31 @@ const SwiperButtonImage = styled.img`
 `;
 
 const index = () => {
+
+  var localImage = window.localStorage.getItem('image');
+
+  if (localImage === null) {
+    localImage = -1;
+  } else {
+    localImage *= 1
+  }
+
   const context = useContext(Context);
   const { paper, setPaper } = context;
 
   const [swiperSetting, setSwiperSetting] = useState(null);
-  const prevRef = useRef(null);
-  const nextRef = useRef(null);
+  const [select, setSelect] = useState(localImage)
+  // const prevRef = useRef(null);
+  // const nextRef = useRef(null);
   const history = useHistory();
   const didTapNext = () => {
-    window.localStorage.setItem('image', paper)
+    window.localStorage.setItem('image', select)
     history.push("/sub2");
   };
 
-
-  useEffect(() => {
-    if (!swiperSetting) {
-      setSwiperSetting({
-        spaceBetween: 5,
-        centeredSlides: true,
-        slidesPerView: 1,
-        pagination: {
-          clickable: true,
-        },
-        navigation: {
-          prevEl: prevRef.current,
-          nextEl: nextRef.current,
-        },
-        onBeforeInit: (swiper) => {
-          setTimeout(() => {
-            if (typeof swiper.params.navigation !== "boolean") {
-              if (swiper.params.navigation) {
-                swiper.params.navigation.prevEl = prevRef.current;
-                swiper.params.navigation.nextEl = nextRef.current;
-              }
-            }
-            swiper.navigation.destroy();
-            swiper.navigation.init();
-            swiper.navigation.update();
-          });
-        },
-      });
-    }
-  }, [swiperSetting]);
+  const selectHandler = (e) => {
+    setSelect(paper);
+  }
 
 
   return (
@@ -144,23 +114,23 @@ const index = () => {
           // }}
         >
           <SwiperSlide>
-              <Select>SELECT</Select>
-            <Letter src={mezin1} />
+            {select === 0 ? <Select src={selectImg}/> : <></>}
+            <Letter onClick={selectHandler} src={mezin1} />
           </SwiperSlide>
-          <SwiperSlide>
-            <Select>SELECT</Select>
+          <SwiperSlide onClick={selectHandler}>
+            {select === 1 ? <Select src={selectImg}/> : <></>}
             <Letter src={mezin2} />
           </SwiperSlide>
-          <SwiperSlide>
-            <Select>SELECT</Select>
+          <SwiperSlide onClick={selectHandler}>
+            {select === 2 ? <Select src={selectImg}/> : <></>}
             <Letter src={mezin3} />
           </SwiperSlide>
-          <SwiperSlide>
-            <Select>SELECT</Select>
+          <SwiperSlide onClick={selectHandler}>
+            {select === 3 ? <Select src={selectImg}/> : <></>}
             <Letter src={mezin4} />
           </SwiperSlide>
-          <SwiperSlide>
-            <Select>SELECT</Select>
+          <SwiperSlide onClick={selectHandler}>
+            {select === 4 ? <Select src={selectImg}/> : <></>}
             <Letter src={mezin5} />
           </SwiperSlide>
         </Swiper>
