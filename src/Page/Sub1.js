@@ -85,8 +85,12 @@ const index = () => {
   // const nextRef = useRef(null);
   const history = useHistory();
   const didTapNext = () => {
-    window.localStorage.setItem('image', select)
-    history.push("/sub2");
+    if (select === -1) {
+      alert('편지지를 선택해주세요.')
+    } else {
+      window.localStorage.setItem('image', select)
+      history.push("/sub2");
+    }
   };
 
   const selectHandler = (e) => {
