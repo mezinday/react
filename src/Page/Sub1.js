@@ -32,9 +32,10 @@ const Letter = styled.img`
 
 const index = () => {
   const context = useContext(Context);
-  const { setPaper } = context;
+  const { paper, setPaper } = context;
   const history = useHistory();
   const didTapNext = () => {
+    window.localStorage.setItem('image', paper)
     history.push("/sub2");
   };
 
