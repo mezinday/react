@@ -193,7 +193,7 @@ const index = () => {
 
   const letterList = () => {
     history.push("/letterList");
-  }
+  };
 
   const sendLetter = async () => {
     try {

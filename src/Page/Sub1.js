@@ -37,7 +37,7 @@ const Select = styled.img`
   position: absolute;
   width: 22.5rem;
   height: 17.563rem;
-`
+`;
 const SwiperContainer = styled.div`
   position: relative;
   width: 22.5rem;
@@ -54,7 +54,7 @@ const SwiperContainer = styled.div`
 `;
 
 const SwiperButtonImage = styled.img`
-  position : absolute;
+  position: absolute;
   width: 1rem;
   display: flex;
   justify-content: center;
@@ -67,36 +67,34 @@ const SwiperButtonImage = styled.img`
 `;
 
 const index = () => {
-
-  var localImage = window.localStorage.getItem('image');
+  var localImage = window.localStorage.getItem("image");
 
   if (localImage === null) {
     localImage = -1;
   } else {
-    localImage *= 1
+    localImage *= 1;
   }
 
   const context = useContext(Context);
   const { paper, setPaper } = context;
 
   const [swiperSetting, setSwiperSetting] = useState(null);
-  const [select, setSelect] = useState(localImage)
+  const [select, setSelect] = useState(localImage);
   // const prevRef = useRef(null);
   // const nextRef = useRef(null);
   const history = useHistory();
   const didTapNext = () => {
     if (select === -1) {
-      alert('편지지를 선택해주세요.')
+      alert("편지지를 선택해주세요.");
     } else {
-      window.localStorage.setItem('image', select)
+      window.localStorage.setItem("image", select);
       history.push("/sub2");
     }
   };
 
   const selectHandler = (e) => {
     setSelect(paper);
-  }
-
+  };
 
   return (
     <>
@@ -105,7 +103,7 @@ const index = () => {
         <Title title={"SELECT"} />
         <Title title={"THE"} />
         <Title title={"PAPER."} />
-        <Subtitle title={"편지지를 선택하세요"}/>
+        <Subtitle title={"편지지를 선택하세요"} />
       </Box>
       <SwiperContainer>
         <Swiper
@@ -118,23 +116,23 @@ const index = () => {
           // }}
         >
           <SwiperSlide>
-            {select === 0 ? <Select src={selectImg}/> : <></>}
+            {select === 0 ? <Select src={selectImg} /> : <></>}
             <Letter onClick={selectHandler} src={mezin1} />
           </SwiperSlide>
           <SwiperSlide onClick={selectHandler}>
-            {select === 1 ? <Select src={selectImg}/> : <></>}
+            {select === 1 ? <Select src={selectImg} /> : <></>}
             <Letter src={mezin2} />
           </SwiperSlide>
           <SwiperSlide onClick={selectHandler}>
-            {select === 2 ? <Select src={selectImg}/> : <></>}
+            {select === 2 ? <Select src={selectImg} /> : <></>}
             <Letter src={mezin3} />
           </SwiperSlide>
           <SwiperSlide onClick={selectHandler}>
-            {select === 3 ? <Select src={selectImg}/> : <></>}
+            {select === 3 ? <Select src={selectImg} /> : <></>}
             <Letter src={mezin4} />
           </SwiperSlide>
           <SwiperSlide onClick={selectHandler}>
-            {select === 4 ? <Select src={selectImg}/> : <></>}
+            {select === 4 ? <Select src={selectImg} /> : <></>}
             <Letter src={mezin5} />
           </SwiperSlide>
         </Swiper>
