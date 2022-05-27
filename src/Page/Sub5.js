@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import SwiperCore, { Navigation } from "swiper";
@@ -68,7 +68,8 @@ const Circle = styled.div`
   height: 6rem;
   border-radius: 90px;
   border: solid 4px #000;
-  background-color: #fff;
+  background-color: ${({ idx, activeIdx }) =>
+    idx === activeIdx ? "#d9fe96" : "#fff"};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -114,22 +115,19 @@ const index = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [count, setCount] = useState(0);
+  const [activeIdx, setActiveIdx] = useState(null);
   const [letterList, setLetterList] = useState([]);
   const [swiperSetting, setSwiperSetting] = useState(null);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const history = useHistory();
 
-  const didTapNext = () => {
-    history.push("/main");
-  };
-
   const fetchLetter = async () => {
     try {
       setError(false);
       setLoading(true);
       const { data } = await axios.get(
-        "http://52.79.128.156:3000/api/v1/letters"
+        "https://www.mezin.day/api/v1/letters"
       );
       setCount(data.count);
       var temp = [];
@@ -218,8 +216,22 @@ const index = () => {
             {letterList.map((arr, id1) => (
               <SwiperSlide key={id1}>
                 <PreviewContainer>
-                  {arr.map(({ emoji, name }, id) => (
-                    <Circle key={id}>
+                  {arr.map(({ emoji, name, id }) => (
+                    <Circle
+                      key={id}
+                      idx={id} // idx: 버튼 id 지정
+                      activeIdx={activeIdx} // activeIdx: 현재 클릭된 버튼의 id
+                      // 메진이한테 보여줄 땐 주석 풀어줘야지
+                      // onClick={() => {
+                      //   setActiveIdx(id);
+                      //   setTimeout(() => {
+                      //     history.push({
+                      //       pathname: "/sub6",
+                      //       state: { id: id },
+                      //     });
+                      //   }, 100);
+                      // }}
+                    >
                       {emoji < 5 ? (
                         <Emoji index={emoji} src={emojiList[emoji]} />
                       ) : null}

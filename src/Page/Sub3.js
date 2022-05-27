@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import dotenv from "dotenv";
-import {useBeforeunload} from "react-beforeunload"
+import { useBeforeunload } from "react-beforeunload";
 dotenv.config();
 
 import Title from "./Common/Title";
@@ -136,13 +136,13 @@ const NoButton = styled.div`
 
 const letterList = [mezin1, mezin2, mezin3, mezin4, mezin5];
 const index = () => {
-  useBeforeunload((event) => event.preventDefault())
-  var localContent = window.localStorage.getItem('content');
+  useBeforeunload((event) => event.preventDefault());
+  var localContent = window.localStorage.getItem("content");
   // const context = useContext(Context);
   // const { name, emoji, paper } = context;
 
   if (localContent === null) {
-    localContent = ""
+    localContent = "";
   }
 
   const [letter, setLetter] = useState(localContent);
@@ -151,9 +151,9 @@ const index = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const history = useHistory();
 
-  let name = window.localStorage.getItem('name');
-  let emoji = window.localStorage.getItem('emoji');
-  let image = window.localStorage.getItem('image');
+  let name = window.localStorage.getItem("name");
+  let emoji = window.localStorage.getItem("emoji");
+  let image = window.localStorage.getItem("image");
 
   const modalToggle = () => {
     setModalOpen(!modalOpen);
@@ -165,7 +165,7 @@ const index = () => {
   const postLetter = async () => {
     try {
         await axios.post(
-        "http://52.79.128.156:3000/api/v1/letters/create",
+        "https://www.mezin.day/api/v1/letters/create",
         {
           name: name,
           emoji: emoji,
@@ -178,12 +178,12 @@ const index = () => {
     }
   };
   const didTapNext = () => {
-    var str = letter
+    var str = letter;
     var blank_pattern = /^\s+|\s+$/g;
-    if(str.replace(blank_pattern, '' ) == "" ){
-        alert('공백만 입력되었습니다.');
+    if (str.replace(blank_pattern, "") == "") {
+      alert("공백만 입력되었습니다.");
     } else {
-      window.localStorage.setItem('content', letter);
+      window.localStorage.setItem("content", letter);
       postLetter();
       history.push("/sub4");
     }
