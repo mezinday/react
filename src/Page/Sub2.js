@@ -107,25 +107,24 @@ const emojiWidth = [5.75, 6.375, 4.375, 2.188, 5.688, 4.375];
 const emojiHeight = [1.25, 0.5, 0.563, 3.125, 2.563, 3.125];
 
 const index = () => {
-  var localName = window.localStorage.getItem('name');
-  const localEmoji = window.localStorage.getItem('emoji');
+  var localName = window.localStorage.getItem("name");
+  const localEmoji = window.localStorage.getItem("emoji");
 
   var intEmoji;
   if (localEmoji === null) {
     intEmoji = -1;
   } else {
-    intEmoji = localEmoji * 1
+    intEmoji = localEmoji * 1;
   }
 
   if (localName === null) {
     localName = "";
   }
-  
-  const history = useHistory();
-  const [ name, setName ] = useState(localName);
-  const [ emoji, setEmoji ] = useState(localEmoji);
-  const [circle, setCircle] = useState(intEmoji);
 
+  const history = useHistory();
+  const [name, setName] = useState(localName);
+  const [emoji, setEmoji] = useState(localEmoji);
+  const [circle, setCircle] = useState(intEmoji);
 
   const clickHandler = (id) => {
     setEmoji(id);
@@ -137,22 +136,22 @@ const index = () => {
   }, []);
   const didTapNext = () => {
     if (circle === -1) {
-      alert("이모지를 선택해주세요.")
+      alert("이모지를 선택해주세요.");
     } else if (name === "") {
       alert("이름을 입력해주세요");
     } else if (name !== "") {
-      var str = name
+      var str = name;
       var blank_pattern = /^\s+|\s+$/g;
-      if(str.replace(blank_pattern, '') == "" ){
-          alert('공백만 입력되었습니다.');
+      if (str.replace(blank_pattern, "") == "") {
+        alert("공백만 입력되었습니다.");
       } else {
-        window.localStorage.setItem('name', name);
-        window.localStorage.setItem('emoji', emoji);
+        window.localStorage.setItem("name", name);
+        window.localStorage.setItem("emoji", emoji);
         history.push("/sub3");
       }
     } else {
-      window.localStorage.setItem('name', name);
-      window.localStorage.setItem('emoji', emoji);
+      window.localStorage.setItem("name", name);
+      window.localStorage.setItem("emoji", emoji);
       history.push("/sub3");
     }
   };
@@ -177,7 +176,7 @@ const index = () => {
       ></Input>
 
       <Text2>EMOJI</Text2>
-      <EmojiConstainer style={{margin: "1.438rem 0.938rem 0rem 0.938rem"}}>
+      <EmojiConstainer style={{ margin: "1.438rem 0.938rem 0rem 0.938rem" }}>
         {emojiList1.map((emo, id) => (
           <EmojiBox>
             <Emoji
@@ -190,7 +189,7 @@ const index = () => {
           </EmojiBox>
         ))}
       </EmojiConstainer>
-      <EmojiConstainer style={{margin: "0rem 0.938rem 0rem 0.938rem"}}>
+      <EmojiConstainer style={{ margin: "0rem 0.938rem 0rem 0.938rem" }}>
         {emojiList2.map((emo, id) => (
           <EmojiBox>
             <Emoji

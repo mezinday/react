@@ -19,8 +19,7 @@ const ROOT = styled.div`
   box-sizing: border-box;
   overflow-x: hidden;
 `;
-const Container = styled.div`
-`;
+const Container = styled.div``;
 const App = () => {
   return (
     <ROOT>
