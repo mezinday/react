@@ -165,7 +165,7 @@ const index = () => {
   const postLetter = async () => {
     try {
         await axios.post(
-        "https://www.mezin.day:3000/api/v1/letters/create",
+        "https://www.mezin.day/api/v1/letters/create",
         {
           name: name,
           emoji: emoji,
