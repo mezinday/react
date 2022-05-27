@@ -7,3 +7,7 @@
     font-family: "Montserrat_Medium";
     src: url("./Montserrat-Medium.ttf");
 }
+@font-face {
+    font-family: "Montserrat_Light";
+    src: url("./Montserrat-Light.ttf");
+}
