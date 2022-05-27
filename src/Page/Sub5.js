@@ -129,7 +129,7 @@ const index = () => {
       setError(false);
       setLoading(true);
       const { data } = await axios.get(
-        "http://52.79.128.156:3000/api/v1/letters"
+        "https://www.mezin.day:3000/api/v1/letters"
       );
       setCount(data.count);
       var temp = [];
