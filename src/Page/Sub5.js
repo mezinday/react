@@ -127,7 +127,7 @@ const index = () => {
       setError(false);
       setLoading(true);
       const { data } = await axios.get(
-        "https://www.mezin.day:3000/api/v1/letters"
+        "https://www.mezin.day/api/v1/letters"
       );
       setCount(data.count);
       var temp = [];

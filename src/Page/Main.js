@@ -179,7 +179,7 @@ const index = () => {
       setLoading(true);
       const {
         data: { count },
-      } = await axios.get("https://www.mezin.day:3000/api/v1/letters/count");
+      } = await axios.get("https://www.mezin.day/api/v1/letters/count");
       setLetterCount(count);
     } catch (e) {
       setError(true);
