@@ -15,7 +15,9 @@ const Ellipse = styled.div`
   width: 9.75rem;
   height: 5.188rem;
   margin: 5.125rem 0 0 0.938rem;
-  padding: 0.875rem 1.813rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 90px;
   border: solid 4px #000;
   background-color: #fff;
@@ -54,9 +56,7 @@ const Ellipse3 = styled.button`
   background-color: #d9fe96;
 `;
 
-const DDay = styled.div`
-  width: 6.125rem;
-  height: 3.438rem;
+const DDay = styled.span`
   font-family: Montserrat_Medium;
   font-size: 3rem;
   font-weight: 500;
@@ -193,7 +193,7 @@ const index = () => {
 
   const letterList = () => {
     history.push("/letterList");
-  }
+  };
 
   const sendLetter = async () => {
     try {
