@@ -164,12 +164,15 @@ const index = () => {
 
   const postLetter = async () => {
     try {
-      await axios.post("http://52.79.128.156:3000/api/v1/letters/create", {
-        name: name,
-        emoji: emoji,
-        image: image,
-        content: letter,
-      });
+        await axios.post(
+        "https://www.mezin.day:3000/api/v1/letters/create",
+        {
+          name: name,
+          emoji: emoji,
+          image: image,
+          content: letter,
+        }
+      );
     } catch (e) {
       setError(true);
     }
