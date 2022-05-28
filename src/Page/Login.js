@@ -59,6 +59,7 @@ const ButtonText = styled.span`
   letter-spacing: -2.4px;
   text-align: center;
   color: #000;
+  cursor: pointer;
 `;
 const FooterContainer = styled.div`
   margin-top: 10.063rem;
@@ -152,6 +153,7 @@ const BackButton = styled.div`
   line-height: 2;
   letter-spacing: -0.75px;
   color: #000;
+  cursor: pointer;
 `;
 const index = () => {
   const [password, setPassword] = useState("");
@@ -159,7 +161,7 @@ const index = () => {
   const history = useHistory();
   const didTapNext = () => {
     if ("kingmezin" === password) {
-      alert("correct!");
+      history.push("/letterList");
     } else {
       setModalOpen(true);
     }

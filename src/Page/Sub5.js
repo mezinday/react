@@ -109,6 +109,13 @@ const emojiList = [emoji1, emoji2, emoji3, emoji4, emoji5];
 const emojiWidth = [4.938, 4.75, 3.75, 1.438, 4.938, 4.938];
 const emojiHeight = [1.125, 0.375, 0.5, 2, 2.188, 2.188];
 
+const get_dday = () => {
+  var mezin_day = new Date("May 29, 2022 23:59:59").getTime();
+  var today = new Date().getTime();
+  var diff = mezin_day - today;
+  return Math.floor(diff / (1000 * 60 * 60 * 24));
+};
+
 const index = () => {
   SwiperCore.use([Navigation]);
 
@@ -122,13 +129,22 @@ const index = () => {
   const nextRef = useRef(null);
   const history = useHistory();
 
+  const didTapEmoji = (id) => {
+    if (get_dday() <= 0) {
+      setActiveIdx(id);
+      setTimeout(() => {
+        history.push({
+          pathname: "/sub6",
+          state: { id: id },
+        });
+      }, 100);
+    }
+  };
   const fetchLetter = async () => {
     try {
       setError(false);
       setLoading(true);
-      const { data } = await axios.get(
-        "https://www.mezin.day/api/v1/letters"
-      );
+      const { data } = await axios.get("https://www.mezin.day/api/v1/letters");
       setCount(data.count);
       var temp = [];
       for (let i = 0; i < data.count; i += 9) {
@@ -221,16 +237,14 @@ const index = () => {
                       key={id}
                       idx={id} // idx: 버튼 id 지정
                       activeIdx={activeIdx} // activeIdx: 현재 클릭된 버튼의 id
-                      // 메진이한테 보여줄 땐 주석 풀어줘야지
-                      // onClick={() => {
-                      //   setActiveIdx(id);
-                      //   setTimeout(() => {
-                      //     history.push({
-                      //       pathname: "/sub6",
-                      //       state: { id: id },
-                      //     });
-                      //   }, 100);
-                      // }}
+                      메진이한테
+                      보여줄
+                      땐
+                      주석
+                      풀어줘야지
+                      onClick={() => {
+                        didTapEmoji(id);
+                      }}
                     >
                       {emoji < 5 ? (
                         <Emoji index={emoji} src={emojiList[emoji]} />

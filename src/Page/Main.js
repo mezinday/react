@@ -197,7 +197,11 @@ const index = () => {
 
   const sendLetter = async () => {
     try {
-      history.push("/sub1");
+      if (get_dday() > 0) {
+        history.push("/sub1");
+      } else {
+        history.push("/login");
+      }
     } catch (e) {}
   };
 
@@ -241,7 +245,7 @@ const index = () => {
         <Ellipse2>oe9day</Ellipse2>
       </Top>
       <Ellipse3 onClick={sendLetter}>
-        <Letter>Send a Letter</Letter>
+        <Letter>{get_dday() <= 0 ? "Read Letters" : "Send a Letter"}</Letter>
       </Ellipse3>
       <Bottom>
         <Ellipse4 onClick={letterList}>Received</Ellipse4>
