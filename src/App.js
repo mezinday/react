@@ -7,6 +7,9 @@ import Sub2 from "./Page/Sub2";
 import Sub3 from "./Page/Sub3";
 import Sub4 from "./Page/Sub4";
 import Sub5 from "./Page/Sub5";
+import Sub6 from "./Page/Sub6";
+import Login from "./Page/Login";
+import Babo from "./Page/Babo";
 
 import Store from "./store/Store";
 
@@ -32,6 +35,9 @@ const App = () => {
             <Route path="/sub3" exact component={Sub3} />
             <Route path="/sub4" exact component={Sub4} />
             <Route path="/letterList" exact component={Sub5} />
+            <Route path="/sub6" exact component={Sub6} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/babo" exact component={Babo} />
             <Redirect to="/main" />
           </Switch>
         </Store>
