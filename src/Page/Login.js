@@ -161,11 +161,15 @@ const index = () => {
   const history = useHistory();
   const didTapNext = () => {
     if ("kingmezin" === password) {
-      history.push("/letterList");
+      window.localStorage.setItem("password", password);
+      history.push("/privateLetterList");
     } else {
       setModalOpen(true);
     }
   };
+  const didTapForget = () => {
+    history.push('babo');
+  }
   const modalToggle = () => {
     setModalOpen(!modalOpen);
   };
@@ -201,7 +205,7 @@ const index = () => {
         <ButtonText>LOGIN</ButtonText>
       </Rectangle>
       <FooterContainer>
-        <FotterTitle onClick={didTapNext}>비밀번호를 잊으셨습니까?</FotterTitle>
+        <FotterTitle onClick={didTapForget}>비밀번호를 잊으셨습니까?</FotterTitle>
         <Copyright>©YUNKIMJO</Copyright>
       </FooterContainer>
       {modalOpen ? (

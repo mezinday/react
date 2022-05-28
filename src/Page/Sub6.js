@@ -69,7 +69,7 @@ const index = () => {
   const history = useHistory();
 
   const didTapNext = () => {
-    history.push("/main");
+    history.goBack();
   };
   const fetchLetter = async () => {
     try {
@@ -127,7 +127,7 @@ const index = () => {
       </PaperContainer>
 
       <FooterContainer>
-        <Footer title={"MAIN"} onClick={didTapNext} />
+        <Footer title={"PREV"} onClick={didTapNext} />
       </FooterContainer>
     </>
   );

@@ -134,7 +134,7 @@ const index = () => {
       setActiveIdx(id);
       setTimeout(() => {
         history.push({
-          pathname: "/sub6",
+          pathname: "/letterForMezin",
           state: { id: id },
         });
       }, 100);
@@ -237,11 +237,6 @@ const index = () => {
                       key={id}
                       idx={id} // idx: 버튼 id 지정
                       activeIdx={activeIdx} // activeIdx: 현재 클릭된 버튼의 id
-                      메진이한테
-                      보여줄
-                      땐
-                      주석
-                      풀어줘야지
                       onClick={() => {
                         didTapEmoji(id);
                       }}
