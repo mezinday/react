@@ -125,13 +125,16 @@ const index = () => {
   const [activeIdx, setActiveIdx] = useState(null);
   const [letterList, setLetterList] = useState([]);
   const [swiperSetting, setSwiperSetting] = useState(null);
+
+  var slideIndex = window.localStorage.getItem("slide_index");
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const history = useHistory();
 
-  const didTapEmoji = (id) => {
+  const didTapEmoji = (id, id1) => {
     if (get_dday() <= 0) {
       setActiveIdx(id);
+      window.localStorage.setItem("slide_index", id1);
       setTimeout(() => {
         history.push({
           pathname: "/letterForMezin",
@@ -228,7 +231,10 @@ const index = () => {
           <SwiperButtonImage src={prev} width={8} height={15} alt="prev" />
         </NavigationButton>
         {swiperSetting && (
-          <Swiper {...swiperSetting}>
+          <Swiper
+            initialSlide={slideIndex === null ? 0 : slideIndex}
+            {...swiperSetting}
+          >
             {letterList.map((arr, id1) => (
               <SwiperSlide key={id1}>
                 <PreviewContainer>
@@ -238,7 +244,7 @@ const index = () => {
                       idx={id} // idx: 버튼 id 지정
                       activeIdx={activeIdx} // activeIdx: 현재 클릭된 버튼의 id
                       onClick={() => {
-                        didTapEmoji(id);
+                        didTapEmoji(id, id1);
                       }}
                     >
                       {emoji < 5 ? (
